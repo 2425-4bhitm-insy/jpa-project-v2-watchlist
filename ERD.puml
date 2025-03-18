@@ -1,0 +1,73 @@
+@startuml
+
+top to bottom direction
+skinparam linetype ortho
+
+entity media {
+    name: varchar(60)
+    description: varchar(1000)
+    mediaId: bigInt
+    duration: number
+    media_type: varchar(60)
+    releaseDate: date
+}
+
+entity media_collection {
+    mediaId: bigInt
+    collectionId: bigInt
+}
+
+enum media_type {
+    movieSeries
+    series
+    season
+    movie
+    episode
+}
+
+entity tag {
+    name: varchar(60)
+    tagId: bigInt
+}
+
+entity media_tag {
+    mediaId: bigInt
+    tagId: bigInt
+}
+
+entity director {
+    personId: bigInt
+    mediaId: bigInt
+}
+
+entity actor {
+    personId: bigInt
+    mediaId: bigInt
+}
+
+entity producer {
+    personId: bigInt
+    mediaId: bigInt
+}
+
+entity person {
+    firstName: varchar(60)
+    lastName: varchar(60)
+    email: varchar(255)
+    personId: bigInt
+}
+person -up-|{ actor
+media -down-|{ actor
+person -up-|{ producer
+media -down-|{ producer
+person -up-|{ director
+media -down-|{ director
+
+tag -left-|{ media_tag
+media -right-|{ media_tag
+
+media_type -up-|{ media
+media -up-{ media_collection
+media }-down- media_collection
+
+@enduml
