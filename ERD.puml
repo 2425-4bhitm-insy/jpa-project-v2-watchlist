@@ -2,6 +2,7 @@
 
 top to bottom direction
 skinparam linetype ortho
+hide empty members
 
 entity media {
     name: varchar(60)
@@ -10,6 +11,8 @@ entity media {
     duration: number
     media_type: varchar(60)
     releaseDate: date
+    rating: number
+    edition : number
 }
 
 entity media_collection {
@@ -19,10 +22,19 @@ entity media_collection {
 
 enum media_type {
     movieSeries
+    movie
     series
     season
-    movie
     episode
+    comic
+    bookSeries
+    book
+}
+
+entity author {
+    personId: bigInt
+    mediaId: bigInt
+
 }
 
 entity tag {
@@ -56,6 +68,10 @@ entity person {
     email: varchar(255)
     personId: bigInt
 }
+
+
+author -up-|{ media
+person -up-|{ author
 person -up-|{ actor
 media -down-|{ actor
 person -up-|{ producer
