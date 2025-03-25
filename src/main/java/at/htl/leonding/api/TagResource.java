@@ -9,6 +9,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 
 @ApplicationScoped
+@Path("/tag")
 public class TagResource {
     @Inject
     TagRepository tagRepository;
