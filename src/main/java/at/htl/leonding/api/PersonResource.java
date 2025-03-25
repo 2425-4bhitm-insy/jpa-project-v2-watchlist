@@ -33,8 +33,7 @@ public class PersonResource {
     @Path("{id:[0-9]+}")
     @Transactional
     public Response delete(@PathParam("id") Long id) {
-        personRepository.deleteById(id);
-        return Response.noContent().build();
+        return Response.ok(personRepository.deleteById(id)).build();
     }
 
 }

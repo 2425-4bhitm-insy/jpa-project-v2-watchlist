@@ -2,7 +2,6 @@ package at.htl.leonding.api;
 
 import at.htl.leonding.entities.Media;
 import at.htl.leonding.repository.MediaRepository;
-import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -36,7 +35,6 @@ public class MediaResource {
     @Path("/{id:[0-9]+}")
     @Transactional
     public Response delete(@PathParam("id") Long id) {
-        mediaRepository.deleteById(id);
-        return Response.noContent().build();
+        return Response.ok(mediaRepository.deleteById(id)).build();
     }
 }

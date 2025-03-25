@@ -33,7 +33,6 @@ public class TagResource {
     @Path("/{id:[0-9]+}")
     @Transactional
     public Response delete(@PathParam("id") Long id) {
-        tagRepository.deleteById(id);
-        return Response.noContent().build();
+        return Response.ok(tagRepository.deleteById(id)).build();
     }
 }
