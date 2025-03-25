@@ -20,27 +20,33 @@ public class Media {
 	private MediaType mediaType;
 
 	@ManyToMany()
-	@JoinTable(joinColumns = {@JoinColumn(name = "mediaId")}, inverseJoinColumns = {@JoinColumn(name = "mediaId")})
+	@JoinTable(name = "media_sub_media", joinColumns = {@JoinColumn(name = "parent_mediaId")},
+	           inverseJoinColumns = {@JoinColumn(name = "child_mediaId")})
 	private List<Media> subMedia;
 
 	@ManyToMany()
-	@JoinTable(joinColumns = {@JoinColumn(name = "mediaId")}, inverseJoinColumns = {@JoinColumn(name = "tagId")})
+	@JoinTable(name = "media_tags", joinColumns = {@JoinColumn(name = "mediaId")},
+	           inverseJoinColumns = {@JoinColumn(name = "tagId")})
 	private List<Tag> tags;
 
 	@ManyToMany()
-	@JoinTable(joinColumns = {@JoinColumn(name = "mediaId")}, inverseJoinColumns = {@JoinColumn(name = "personId")})
+	@JoinTable(name = "media_directors", joinColumns = {@JoinColumn(name = "mediaId")},
+	           inverseJoinColumns = {@JoinColumn(name = "personId")})
 	private List<Person> directors;
 
 	@ManyToMany()
-	@JoinTable(joinColumns = {@JoinColumn(name = "mediaId")}, inverseJoinColumns = {@JoinColumn(name = "personId")})
+	@JoinTable(name = "media_producers", joinColumns = {@JoinColumn(name = "mediaId")},
+	           inverseJoinColumns = {@JoinColumn(name = "personId")})
 	private List<Person> producers;
 
 	@ManyToMany()
-	@JoinTable(joinColumns = {@JoinColumn(name = "mediaId")}, inverseJoinColumns = {@JoinColumn(name = "personId")})
+	@JoinTable(name = "media_actors", joinColumns = {@JoinColumn(name = "mediaId")},
+	           inverseJoinColumns = {@JoinColumn(name = "personId")})
 	private List<Person> actors;
 
 	@ManyToMany()
-	@JoinTable(joinColumns = {@JoinColumn(name = "mediaId")}, inverseJoinColumns = {@JoinColumn(name = "personId")})
+	@JoinTable(name = "media_authors", joinColumns = {@JoinColumn(name = "mediaId")},
+	           inverseJoinColumns = {@JoinColumn(name = "personId")})
 	private List<Person> authors;
 
 	public Media() {
