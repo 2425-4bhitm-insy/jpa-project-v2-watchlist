@@ -1,0 +1,8 @@
+1.
+get the most relevant actor/director/producer/author of a media with the duration of all his films
+
+2.
+get all actor/director/producer/author of a certain media type
+
+3.
+get the average rating of all media of an actor/director/producer/author
