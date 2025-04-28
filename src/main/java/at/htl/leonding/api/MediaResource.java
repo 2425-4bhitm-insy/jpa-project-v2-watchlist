@@ -6,6 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @ApplicationScoped
@@ -17,6 +18,7 @@ public class MediaResource {
 
     @GET
     @Path("/{id:[0-9]+}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@PathParam("id") Long id) {
         if (id == null) {
             return Response.ok(mediaRepository.listAll()).build();
@@ -26,6 +28,8 @@ public class MediaResource {
 
     @POST
     @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response create(Media media) {
         mediaRepository.persist(media);
         return Response.ok(media).build();
@@ -34,18 +38,21 @@ public class MediaResource {
     @DELETE
     @Path("/{id:[0-9]+}")
     @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Long id) {
         return Response.ok(mediaRepository.deleteById(id)).build();
     }
 
     @GET
     @Path("/type/{mediaType}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getAllByMediaType(@PathParam("mediaType") String mediaType) {
         return Response.ok(mediaRepository.getAllByMediaType(mediaType)).build();
     }
 
     @GET
     @Path("/averageRating/{personId}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getAverageRatingByPerson(@PathParam("personId") Long personId) {
         return Response.ok(mediaRepository.getAverageRatingByPerson(personId)).build();
     }

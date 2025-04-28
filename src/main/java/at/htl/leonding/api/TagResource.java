@@ -6,6 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @ApplicationScoped
@@ -16,6 +17,7 @@ public class TagResource {
 
     @GET
     @Path("/{id:[0-9]+}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@PathParam("id") Long id) {
         if (id == null || id == 0) {
             return Response.ok(tagRepository.listAll()).build();
@@ -25,6 +27,8 @@ public class TagResource {
 
     @POST
     @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response create(Tag tag) {
         tagRepository.persist(tag);
         return Response.ok(tag).build();
@@ -33,6 +37,7 @@ public class TagResource {
     @DELETE
     @Path("/{id:[0-9]+}")
     @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Long id) {
         return Response.ok(tagRepository.deleteById(id)).build();
     }

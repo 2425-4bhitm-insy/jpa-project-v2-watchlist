@@ -17,6 +17,7 @@ public class PersonResource {
 
     @GET
     @Path("{id:[0-9]+}")
+    @Produces("application/json")
     public Response getAll(@PathParam("id") Long id) {
         if (id == null || id == 0) {
             return Response.ok(personRepository.listAll()).build();
@@ -26,6 +27,8 @@ public class PersonResource {
 
     @POST
     @Transactional
+    @Consumes("application/json")
+    @Produces("application/json")
     public Response create(Person person) {
         personRepository.persist(person);
         return Response.ok(person).build();
@@ -34,6 +37,7 @@ public class PersonResource {
     @DELETE
     @Path("{id:[0-9]+}")
     @Transactional
+    @Produces("application/json")
     public Response delete(@PathParam("id") Long id) {
         return Response.ok(personRepository.deleteById(id)).build();
     }
