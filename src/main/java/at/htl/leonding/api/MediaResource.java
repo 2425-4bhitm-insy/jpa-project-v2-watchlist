@@ -37,4 +37,16 @@ public class MediaResource {
     public Response delete(@PathParam("id") Long id) {
         return Response.ok(mediaRepository.deleteById(id)).build();
     }
+
+    @GET
+    @Path("/type/{mediaType}")
+    public Response getAllByMediaType(@PathParam("mediaType") String mediaType) {
+        return Response.ok(mediaRepository.getAllByMediaType(mediaType)).build();
+    }
+
+    @GET
+    @Path("/averageRating/{personId}")
+    public Response getAverageRatingByPerson(@PathParam("personId") Long personId) {
+        return Response.ok(mediaRepository.getAverageRatingByPerson(personId)).build();
+    }
 }
