@@ -1,6 +1,7 @@
 package at.htl.leonding.api;
 
 import at.htl.leonding.entities.Person;
+import at.htl.leonding.entities.PersonType;
 import at.htl.leonding.repository.PersonRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -38,8 +39,8 @@ public class PersonResource {
     }
 
     @GET
-    @Path("/actor/mostRelevant")
-    public Response mostRelevantActor() {
-        return Response.ok(personRepository.getMostRelevantActor()).build();
+    @Path("/mostRelevant/{job}")
+    public Response mostRelevantActor(@PathParam("job")PersonType pt) {
+        return Response.ok(personRepository.getMostRelevant(pt)).build();
     }
 }
