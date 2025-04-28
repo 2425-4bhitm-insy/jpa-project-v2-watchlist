@@ -38,3 +38,19 @@ INSERT INTO media_tags (mediaId, tagId) VALUES
                                             ((SELECT mediaId FROM Media WHERE name = 'Movie 1'), (SELECT tagId FROM Tag WHERE name = 'Action')),
                                             ((SELECT mediaId FROM Media WHERE name = 'Series 1'), (SELECT tagId FROM Tag WHERE name = 'Drama')),
                                             ((SELECT mediaId FROM Media WHERE name = 'Episode 1'), (SELECT tagId FROM Tag WHERE name = 'Comedy'));
+
+
+
+INSERT INTO Media (mediaId, duration, releaseDate, rating, edition, name, description, mediaType) VALUES
+(nextval('media_seq'), 90, '2023-01-01', 5, 1, 'Series', 'Series all episodes', 'SERIES'),
+(nextval('media_seq'), 90, '2023-01-01', 5, 1, 'Episode ONE', 'Series episode 1', 'EPISODE'),
+(nextval('media_seq'), 90, '2023-01-01', 5, 1, 'Episode TWO', 'Series episode 1', 'EPISODE'),
+(nextval('media_seq'), 90, '2023-01-01', 5, 1, 'Episode THREE', 'Series episode 1', 'EPISODE'),
+(nextval('media_seq'), 90, '2023-01-01', 5, 1, 'Episode FOUR', 'Series episode 1', 'EPISODE');
+
+INSERT INTO MediaCollection (mediaCollectionId, parentMediaId, subMediaId, ordering) VALUES
+(nextval('mediacollection_seq'), (SELECT mediaId FROM Media WHERE name = 'Series'), (SELECT mediaId FROM Media WHERE name = 'Episode ONE'), 1),
+(nextval('mediacollection_seq'), (SELECT mediaId FROM Media WHERE name = 'Series'), (SELECT mediaId FROM Media WHERE name = 'Episode TWO'), 2),
+(nextval('mediacollection_seq'), (SELECT mediaId FROM Media WHERE name = 'Series'), (SELECT mediaId FROM Media WHERE name = 'Episode THREE'), 3),
+(nextval('mediacollection_seq'), (SELECT mediaId FROM Media WHERE name = 'Series'), (SELECT mediaId FROM Media WHERE name = 'Episode FOUR'), 4);
+
