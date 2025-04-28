@@ -1,5 +1,5 @@
 -- Insert test data for Media
-INSERT INTO Media (mediaId, length, releaseDate, rating, edition, name, description, mediaType) VALUES
+INSERT INTO Media (mediaId, duration, releaseDate, rating, edition, name, description, mediaType) VALUES
                                                                                                     (nextval('media_seq'), 120, '2023-01-01', 5, 1, 'Movie 1', 'Description for Movie 1', 'MOVIE'),
                                                                                                     (nextval('media_seq'), 45, '2023-02-01', 4, 1, 'Series 1', 'Description for Series 1', 'SERIES'),
                                                                                                     (nextval('media_seq'), 60, '2023-03-01', 3, 1, 'Episode 1', 'Description for Episode 1', 'EPISODE');
