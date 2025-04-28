@@ -9,7 +9,7 @@ public class Media {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long mediaId;
-	private int length;
+	private int duration;
 	private LocalDate releaseDate;
 	private int rating;
 	private int edition;
@@ -52,10 +52,10 @@ public class Media {
 	public Media() {
 	}
 
-	public Media(Long mediaId, int length, LocalDate releaseDate, int rating, int edition, String name,
+	public Media(Long mediaId, int duration, LocalDate releaseDate, int rating, int edition, String name,
 	             String description, MediaType mediaType) {
 		this.mediaId = mediaId;
-		this.setLength(length);
+		this.setDuration(duration);
 		this.setReleaseDate(releaseDate);
 		this.setRating(rating);
 		this.setEdition(edition);
@@ -68,12 +68,12 @@ public class Media {
 		this.setDescription(description);
 	}
 
-	public int getLength() {
-		return length;
+	public int getDuration() {
+		return duration;
 	}
 
-	public Media setLength(int length) {
-		this.length = length;
+	public Media setDuration(int duration) {
+		this.duration = duration;
 		return this;
 	}
 
