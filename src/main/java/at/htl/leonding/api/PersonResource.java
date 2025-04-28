@@ -37,4 +37,9 @@ public class PersonResource {
         return Response.ok(personRepository.deleteById(id)).build();
     }
 
+    @GET
+    @Path("/actor/mostRelevant")
+    public Response mostRelevantActor() {
+        return Response.ok(personRepository.getMostRelevantActor()).build();
+    }
 }

@@ -23,4 +23,37 @@ public class Person {
 		this.firstName = firstName;
 		this.personId = personId;
 	}
+
+
+	public Long getPersonId() {
+		return personId;
+	}
+
+	private void setPersonId(Long personId) {
+		this.personId = personId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	private void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	private void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	private void setEmail(String email) {
+		this.email = email;
+	}
 }

@@ -9,11 +9,11 @@ public class MediaCollection {
 	Long mediaCollectionId;
 
 	@ManyToOne()
-	@JoinColumn(name = "mediaID", nullable = false)
+	@JoinColumn(name = "parentMediaID", nullable = false)
 	Media parentMedia;
 
 	@ManyToOne()
-	@JoinColumn(name = "mediaID", nullable = false)
+	@JoinColumn(name = "subMediaID", nullable = false)
 	Media subMedia;
 
 
