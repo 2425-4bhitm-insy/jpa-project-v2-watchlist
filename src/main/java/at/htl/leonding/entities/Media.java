@@ -1,6 +1,8 @@
 package at.htl.leonding.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class Media {
 	           inverseJoinColumns = {@JoinColumn(name = "child_mediaId")})
 	private List<Media> subMedia;
 
+	@Cascade(CascadeType.REMOVE)
 	@ManyToMany()
 	@JoinTable(name = "media_tags", joinColumns = {@JoinColumn(name = "mediaId")},
 	           inverseJoinColumns = {@JoinColumn(name = "tagId")})
