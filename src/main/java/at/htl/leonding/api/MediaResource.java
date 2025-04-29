@@ -20,7 +20,7 @@ public class MediaResource {
     @Path("/{id:[0-9]+}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@PathParam("id") Long id) {
-        if (id == null) {
+        if (id == null || id == 0) {
             return Response.ok(mediaRepository.listAll()).build();
         }
         return Response.ok(mediaRepository.findById(id)).build();
