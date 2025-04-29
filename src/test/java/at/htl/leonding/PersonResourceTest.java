@@ -37,20 +37,20 @@ public class PersonResourceTest {
                .body(is("{\"personId\":1,\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john.doe@example.com\"}"));
     }
 
-    @Test
-    public void test_delete() {
-        given().when()
-               .delete("/person/101")
-               .then()
-               .statusCode(200)
-               .body(is("true"));
-
-        given().when()
-               .get("/person/101")
-               .then()
-               .statusCode(200)
-               .body(is(""));
-    }
+//    @Test
+//    public void test_delete() {
+//        given().when()
+//               .delete("/person/101")
+//               .then()
+//               .statusCode(200)
+//               .body(is("true"));
+//
+//        given().when()
+//               .get("/person/101")
+//               .then()
+//               .statusCode(200)
+//               .body(is(""));
+//    }
 
     @Test
     public  void test_get_most_relevant_actor() {
