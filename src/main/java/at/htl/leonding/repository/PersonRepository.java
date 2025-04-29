@@ -11,22 +11,55 @@ public class PersonRepository extends BetterRepository<Person> {
 	}
 
 	public Person getMostRelevant(PersonType pt) {
-		String query = """
-        SELECT p
-        FROM Person p
-        JOIN %s r ON p.personId = r.personId
-        JOIN Media m ON r.mediaId = m.mediaId
-        WHERE r.personType = :personType
-        GROUP BY p.personId
-        ORDER BY SUM(m.duration) DESC
-    """.formatted(pt);
 
-		return getEntityManager()
-				.createQuery(query, Person.class)
-				.setParameter("personType", pt)
-				.setMaxResults(1)
-				.getResultStream()
-				.findFirst()
-				.orElse(null);
+		if (pt == PersonType.actors) {
+			return getEntityManager()
+					.createQuery("""
+				   SELECT p
+				   FROM  Media m
+					   join Person p on p member of m.actors
+				   group by p
+				   order by sum(m.duration) desc
+				   limit 1
+				""", Person.class)
+					.getSingleResult();
+		}
+		else if (pt == PersonType.authors) {
+			return getEntityManager()
+					.createQuery("""
+				   SELECT p
+				   FROM  Media m
+					   join Person p on p member of m.authors
+				   group by p
+				   order by sum(m.duration) desc
+				   limit 1
+				""", Person.class)
+					.getSingleResult();
+		}
+		else if (pt == PersonType.directors) {
+			return getEntityManager()
+					.createQuery("""
+				   SELECT p
+				   FROM  Media m
+					   join Person p on p member of m.directors
+				   group by p
+				   order by sum(m.duration) desc
+				   limit 1
+				""", Person.class)
+					.getSingleResult();
+		}
+		else if (pt == PersonType.producers) {
+			return getEntityManager()
+					.createQuery("""
+				   SELECT p
+				   FROM  Media m
+					   join Person p on p member of m.producers
+				   group by p
+				   order by sum(m.duration) desc
+				   limit 1
+				""", Person.class)
+					.getSingleResult();
+		}
+		return null;
 	}
 }
