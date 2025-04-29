@@ -39,6 +39,8 @@ public class TagResource {
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Long id) {
+        tagRepository.findById(id).media.clear();
+        tagRepository.flush();
         return Response.ok(tagRepository.deleteById(id)).build();
     }
 }

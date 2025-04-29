@@ -1,10 +1,9 @@
 package at.htl.leonding.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Media {
@@ -24,33 +23,32 @@ public class Media {
 	@ManyToMany()
 	@JoinTable(name = "media_sub_media", joinColumns = {@JoinColumn(name = "parent_mediaId")},
 	           inverseJoinColumns = {@JoinColumn(name = "child_mediaId")})
-	private List<Media> subMedia;
+	private final Set<Media> subMedia = new HashSet<>();
 
-	@Cascade(CascadeType.REMOVE)
 	@ManyToMany()
 	@JoinTable(name = "media_tags", joinColumns = {@JoinColumn(name = "mediaId")},
 	           inverseJoinColumns = {@JoinColumn(name = "tagId")})
-	private List<Tag> tags;
+	private final Set<Tag> tags = new HashSet<>();
 
 	@ManyToMany()
 	@JoinTable(name = "media_directors", joinColumns = {@JoinColumn(name = "mediaId")},
 	           inverseJoinColumns = {@JoinColumn(name = "personId")})
-	private List<Person> directors;
+	private final Set<Person> directors = new HashSet<>();
 
 	@ManyToMany()
 	@JoinTable(name = "media_producers", joinColumns = {@JoinColumn(name = "mediaId")},
 	           inverseJoinColumns = {@JoinColumn(name = "personId")})
-	private List<Person> producers;
+	private final Set<Person> producers = new HashSet<>();
 
 	@ManyToMany()
 	@JoinTable(name = "media_actors", joinColumns = {@JoinColumn(name = "mediaId")},
 	           inverseJoinColumns = {@JoinColumn(name = "personId")})
-	private List<Person> actors;
+	private final Set<Person> actors = new HashSet<>();
 
 	@ManyToMany()
 	@JoinTable(name = "media_authors", joinColumns = {@JoinColumn(name = "mediaId")},
 	           inverseJoinColumns = {@JoinColumn(name = "personId")})
-	private List<Person> authors;
+	private final Set<Person> authors = new HashSet<>();
 
 	public Media() {
 	}
@@ -69,6 +67,10 @@ public class Media {
 
 	public Media(String description) {
 		this.setDescription(description);
+	}
+
+	public Set<Tag> getTags() {
+		return tags;
 	}
 
 	public int getDuration() {
