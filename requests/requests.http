@@ -1,0 +1,81 @@
+GET localhost:8080/person/1
+Accept: Application/json
+
+###
+POST localhost:8080/person
+Content-Type: application/json
+
+{
+  "firstName":"J",
+  "lastName":"D",
+  "email":"j.d@email.com"
+}
+
+
+###
+GET localhost:8080/person/mostRelevant/actors
+Accept: application/json
+
+# MediaResource HTTP Requests
+
+### Get all media or a specific media by ID
+GET http://localhost:8080/media/1
+Accept: application/json
+
+###
+
+### Create a new media
+POST http://localhost:8080/media
+Content-Type: application/json
+
+{
+  "name": "Sample Media",
+  "description": "A sample media description",
+  "duration": 120,
+  "media_type": "movie",
+  "releaseDate": "2023-01-01",
+  "rating": 4.5,
+  "edition": 1
+}
+
+###
+
+### Delete a media by ID
+DELETE http://localhost:8080/media/1
+Accept: application/json
+
+###
+
+### Get all media by media type
+GET http://localhost:8080/media/type/MOVIE
+Accept: application/json
+
+###
+
+### Get average rating of media by person ID
+GET http://localhost:8080/media/averageRating/1
+Accept: application/json
+
+---
+
+# TagResource HTTP Requests
+
+### Get all tags or a specific tag by ID
+GET http://localhost:8080/tag/1
+Accept: application/json
+
+###
+
+### Create a new tag
+POST http://localhost:8080/tag
+Content-Type: application/json
+
+{
+  "name": "Sample Tag"
+}
+
+###
+
+### Delete a tag by ID
+DELETE http://localhost:8080/tag/1
+Accept: application/json
