@@ -46,7 +46,7 @@ public class MediaResource {
     @GET
     @Path("/type/{mediaType}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllByMediaType(@PathParam("mediaType") String mediaType) {
+    public Response getAllByMediaType(@PathParam("mediaType") at.htl.leonding.entities.MediaType mediaType) {
         return Response.ok(mediaRepository.getAllByMediaType(mediaType)).build();
     }
 
