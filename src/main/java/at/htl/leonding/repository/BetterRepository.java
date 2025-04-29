@@ -8,6 +8,7 @@ import java.util.List;
 public abstract class BetterRepository<T> implements PanacheRepository<T> {
 	public static final String ID_FIELD_NAME = "Id";
 	private final Class<T> type;
+	private String idFieldName = "";
 
 	protected BetterRepository(Class<T> type) {
 		this.type = type;
@@ -18,9 +19,14 @@ public abstract class BetterRepository<T> implements PanacheRepository<T> {
 	}
 
 	public String idField() {
-		return Arrays.stream(type.getDeclaredFields()).filter(s -> s.getName().contains(ID_FIELD_NAME)).findFirst()
-		             .orElseThrow(() -> new IllegalStateException(type.getName() + " does not have a valid Id field"))
-		             .getName();
+		if (idFieldName.isEmpty()) {
+			idFieldName = Arrays.stream(type.getDeclaredFields()).filter(s -> s.getName().contains(ID_FIELD_NAME))
+					.findFirst().orElseThrow(
+							() -> new IllegalStateException(type.getName() + " does not have a valid Id field"))
+					.getName();
+		}
+
+		return idFieldName;
 	}
 
 	public Class<T> getType() {
