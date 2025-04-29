@@ -20,7 +20,7 @@ public class MediaResource {
     @Path("/{id:[0-9]+}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@PathParam("id") Long id) {
-        if (id == null) {
+        if (id == null || id == 0) {
             return Response.ok(mediaRepository.listAll()).build();
         }
         return Response.ok(mediaRepository.findById(id)).build();
@@ -46,7 +46,7 @@ public class MediaResource {
     @GET
     @Path("/type/{mediaType}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllByMediaType(@PathParam("mediaType") String mediaType) {
+    public Response getAllByMediaType(@PathParam("mediaType") at.htl.leonding.entities.MediaType mediaType) {
         return Response.ok(mediaRepository.getAllByMediaType(mediaType)).build();
     }
 

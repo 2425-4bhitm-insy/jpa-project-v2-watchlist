@@ -1,6 +1,7 @@
 package at.htl.leonding.repository;
 
 import at.htl.leonding.entities.Media;
+import at.htl.leonding.entities.MediaType;
 import at.htl.leonding.entities.Person;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -12,16 +13,15 @@ public class MediaRepository extends BetterRepository<Media> {
         super(Media.class);
     }
 
-    public List<Person> getAllByMediaType(String mediaType) {
+    public List<Person> getAllByMediaType(MediaType mediaType) {
         return getEntityManager().createQuery(
                 """
                                 SELECT DISTINCT p FROM Media m
-                                LEFT JOIN Actor a ON m.mediaId = a.mediaId
-                                LEFT JOIN Director d ON m.mediaId = d.mediaId
-                                LEFT JOIN Producer pr ON m.mediaId = pr.mediaId
-                                LEFT JOIN Author au ON m.mediaId = au.mediaId
-                                LEFT JOIN Person p ON p.personId IN (a.personId, d.personId, pr.personId, au.personId)
-                                WHERE m.mediaType = :mediaType 
+                                LEFT JOIN Person p ON p MEMBER OF m.actors
+                                or p MEMBER OF m.authors
+                                or p MEMBER OF m.directors
+                                or p MEMBER OF m.producers
+                                WHERE m.mediaType = :mediaType
                         """, Person.class)
                                  .setParameter("mediaType", mediaType)
                                  .getResultList();
